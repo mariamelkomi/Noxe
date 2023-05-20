@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" lang="ar">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7" lang="ar">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8" lang="ar">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html lang="ar">
+<!--<![endif]-->
+<head><script>if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\/7\..*?rv:11/i)){var href=document.location.href;if(!href.match(/[?&]nowprocket/)){if(href.indexOf("?")==-1){if(href.indexOf("#")==-1){document.location.href=href+"?nowprocket=1"}else{document.location.href=href.replace("#","?nowprocket=1#")}}else{if(href.indexOf("#")==-1){document.location.href=href+"&nowprocket=1"}else{document.location.href=href.replace("#","&nowprocket=1#")}}}}</script><script>class RocketLazyLoadScripts{constructor(e){this.triggerEvents=e,this.eventOptions={passive:!0},this.userEventListener=this.triggerListener.bind(this),this.delayedScripts={normal:[],async:[],defer:[]},this.allJQueries=[]}_addUserInteractionListener(e){this.triggerEvents.forEach((t=>window.addEventListener(t,e.userEventListener,e.eventOptions)))}_removeUserInteractionListener(e){this.triggerEvents.forEach((t=>window.removeEventListener(t,e.userEventListener,e.eventOptions)))}triggerListener(){this._removeUserInteractionListener(this),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",this._loadEverythingNow.bind(this)):this._loadEverythingNow()}async _loadEverythingNow(){this._delayEventListeners(),this._delayJQueryReady(this),this._handleDocumentWrite(),this._registerAllDelayedScripts(),this._preloadAllScripts(),await this._loadScriptsFromList(this.delayedScripts.normal),await this._loadScriptsFromList(this.delayedScripts.defer),await this._loadScriptsFromList(this.delayedScripts.async),await this._triggerDOMContentLoaded(),await this._triggerWindowLoad(),window.dispatchEvent(new Event("rocket-allScriptsLoaded"))}_registerAllDelayedScripts(){document.querySelectorAll("script[type=rocketlazyloadscript]").forEach((e=>{e.hasAttribute("src")?e.hasAttribute("async")&&!1!==e.async?this.delayedScripts.async.push(e):e.hasAttribute("defer")&&!1!==e.defer||"module"===e.getAttribute("data-rocket-type")?this.delayedScripts.defer.push(e):this.delayedScripts.normal.push(e):this.delayedScripts.normal.push(e)}))}async _transformScript(e){return await this._requestAnimFrame(),new Promise((t=>{const n=document.createElement("script");let i;[...e.attributes].forEach((e=>{let t=e.nodeName;"type"!==t&&("data-rocket-type"===t&&(t="type",i=e.nodeValue),n.setAttribute(t,e.nodeValue))})),e.hasAttribute("src")&&this._isValidScriptType(i)?(n.addEventListener("load",t),n.addEventListener("error",t)):(n.text=e.text,t()),e.parentNode.replaceChild(n,e)}))}_isValidScriptType(e){return!e||""===e||"string"==typeof e&&["text/javascript","text/x-javascript","text/ecmascript","text/jscript","application/javascript","application/x-javascript","application/ecmascript","application/jscript","module"].includes(e.toLowerCase())}async _loadScriptsFromList(e){const t=e.shift();return t?(await this._transformScript(t),this._loadScriptsFromList(e)):Promise.resolve()}_preloadAllScripts(){var e=document.createDocumentFragment();[...this.delayedScripts.normal,...this.delayedScripts.defer,...this.delayedScripts.async].forEach((t=>{const n=t.getAttribute("src");if(n){const t=document.createElement("link");t.href=n,t.rel="preload",t.as="script",e.appendChild(t)}})),document.head.appendChild(e)}_delayEventListeners(){let e={};function t(t,n){!function(t){function n(n){return e[t].eventsToRewrite.indexOf(n)>=0?"rocket-"+n:n}e[t]||(e[t]={originalFunctions:{add:t.addEventListener,remove:t.removeEventListener},eventsToRewrite:[]},t.addEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.add.apply(t,arguments)},t.removeEventListener=function(){arguments[0]=n(arguments[0]),e[t].originalFunctions.remove.apply(t,arguments)})}(t),e[t].eventsToRewrite.push(n)}function n(e,t){let n=e[t];Object.defineProperty(e,t,{get:()=>n||function(){},set(i){e["rocket"+t]=n=i}})}t(document,"DOMContentLoaded"),t(window,"DOMContentLoaded"),t(window,"load"),t(window,"pageshow"),t(document,"readystatechange"),n(document,"onreadystatechange"),n(window,"onload"),n(window,"onpageshow")}_delayJQueryReady(e){let t=window.jQuery;Object.defineProperty(window,"jQuery",{get:()=>t,set(n){if(n&&n.fn&&!e.allJQueries.includes(n)){n.fn.ready=n.fn.init.prototype.ready=function(t){e.domReadyFired?t.bind(document)(n):document.addEventListener("rocket-DOMContentLoaded",(()=>t.bind(document)(n)))};const t=n.fn.on;n.fn.on=n.fn.init.prototype.on=function(){if(this[0]===window){function e(e){return e.split(" ").map((e=>"load"===e||0===e.indexOf("load.")?"rocket-jquery-load":e)).join(" ")}"string"==typeof arguments[0]||arguments[0]instanceof String?arguments[0]=e(arguments[0]):"object"==typeof arguments[0]&&Object.keys(arguments[0]).forEach((t=>{delete Object.assign(arguments[0],{[e(t)]:arguments[0][t]})[t]}))}return t.apply(this,arguments),this},e.allJQueries.push(n)}t=n}})}async _triggerDOMContentLoaded(){this.domReadyFired=!0,await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-DOMContentLoaded")),await this._requestAnimFrame(),document.dispatchEvent(new Event("rocket-readystatechange")),await this._requestAnimFrame(),document.rocketonreadystatechange&&document.rocketonreadystatechange()}async _triggerWindowLoad(){await this._requestAnimFrame(),window.dispatchEvent(new Event("rocket-load")),await this._requestAnimFrame(),window.rocketonload&&window.rocketonload(),await this._requestAnimFrame(),this.allJQueries.forEach((e=>e(window).trigger("rocket-jquery-load"))),window.dispatchEvent(new Event("rocket-pageshow")),await this._requestAnimFrame(),window.rocketonpageshow&&window.rocketonpageshow()}_handleDocumentWrite(){const e=new Map;document.write=document.writeln=function(t){const n=document.currentScript;n||console.error("WPRocket unable to document.write this: "+t);const i=document.createRange(),r=n.parentElement;let a=e.get(n);void 0===a&&(a=n.nextSibling,e.set(n,a));const o=document.createDocumentFragment();i.setStart(o,0),o.appendChild(i.createContextualFragment(t)),r.insertBefore(o,a)}}async _requestAnimFrame(){return new Promise((e=>requestAnimationFrame(e)))}static run(){const e=new RocketLazyLoadScripts(["keydown","mousemove","touchmove","touchstart","touchend","wheel"]);e._addUserInteractionListener(e)}}RocketLazyLoadScripts.run();
+</script>
+	<!-- Quantcast Choice. Consent Manager Tag v2.0 (for TCF 2.0) -->
+<script type="rocketlazyloadscript" data-rocket-type="text/javascript" async=true>
+(function() {
+  var host = window.location.hostname;
+  var element = document.createElement('script');
+  var firstScript = document.getElementsByTagName('script')[0];
+  var url = 'https://quantcast.mgr.consensu.org'
+    .concat('/choice/', 'deCwlQAR_q3bc', '/', host, '/choice.js')
+  var uspTries = 0;
+  var uspTriesLimit = 3;
+  element.async = true;
+  element.type = 'text/javascript';
+  element.src = url;
+
+  firstScript.parentNode.insertBefore(element, firstScript);
+
+  function makeStub() {
+    var TCF_LOCATOR_NAME = '__tcfapiLocator';
+    var queue = [];
+    var win = window;
+    var cmpFrame;
+
+    function addFrame() {
+      var doc = win.document;
+      var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+      if (!otherCMP) {
+        if (doc.body) {
+          var iframe = doc.createElement('iframe');
+
+          iframe.style.cssText = 'display:none';
+          iframe.name = TCF_LOCATOR_NAME;
+          doc.body.appendChild(iframe);
+        } else {
+          setTimeout(addFrame, 5);
+        }
+      }
+      return !otherCMP;
+    }
+
+    function tcfAPIHandler() {
+      var gdprApplies;
+      var args = arguments;
+
+      if (!args.length) {
+        return queue;
+      } else if (args[0] === 'setGdprApplies') {
+        if (
+          args.length > 3 &&
+          args[2] === 2 &&
+          typeof args[3] === 'boolean'
+        ) {
+          gdprApplies = args[3];
+          if (typeof args[2] === 'function') {
+            args[2]('set', true);
+          }
+        }
+      } else if (args[0] === 'ping') {
+        var retr = {
+          gdprApplies: gdprApplies,
+          cmpLoaded: false,
+          cmpStatus: 'stub'
+        };
+
+        if (typeof args[2] === 'function') {
+          args[2](retr);
+        }
+      } else {
+        queue.push(args);
+      }
+    }
+
+    function postMessageEventHandler(event) {
+      var msgIsString = typeof event.data === 'string';
+      var json = {};
+
+      try {
+        if (msgIsString) {
+          json = JSON.parse(event.data);
+        } else {
+          json = event.data;
+        }
+      } catch (ignore) {}
+
+      var payload = json.__tcfapiCall;
+
+      if (payload) {
+        window.__tcfapi(
+          payload.command,
+          payload.version,
+          function(retValue, success) {
+            var returnMsg = {
+              __tcfapiReturn: {
+                returnValue: retValue,
+                success: success,
+                callId: payload.callId
+              }
+            };
+            if (msgIsString) {
+              returnMsg = JSON.stringify(returnMsg);
+            }
+            event.source.postMessage(returnMsg, '*');
+          },
+          payload.parameter
+        );
+      }
+    }
+
+    while (win) {
+      try {
+        if (win.frames[TCF_LOCATOR_NAME]) {
+          cmpFrame = win;
+          break;
+        }
+      } catch (ignore) {}
+
+      if (win === window.top) {
+        break;
+      }
+      win = win.parent;
+    }
+    if (!cmpFrame) {
+      addFrame();
+      win.__tcfapi = tcfAPIHandler;
+      win.addEventListener('message', postMessageEventHandler, false);
+    }
+  };
+
+  makeStub();
+
+  var uspStubFunction = function() {
+    var arg = arguments;
+    if (typeof window.__uspapi !== uspStubFunction) {
+      setTimeout(function() {
+        if (typeof window.__uspapi !== 'undefined') {
+          window.__uspapi.apply(window.__uspapi, arg);
+        }
+      }, 500);
+    }
+  };
+
+  var checkIfUspIsReady = function() {
+    uspTries++;
+    if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+      console.warn('USP is not accessible');
+    } else {
+      clearInterval(uspInterval);
+    }
+  };
+
+  if (typeof window.__uspapi === 'undefined') {
+    window.__uspapi = uspStubFunction;
+    var uspInterval = setInterval(checkIfUspIsReady, 6000);
+  }
+})();
+</script>
+<!-- End Quantcast Choice. Consent Manager Tag v2.0 (for TCF 2.0) -->
+	<script>
+__tcfapi('addEventListener', 2, function(tcData, success) {
+    if (success) {
+        if (tcData.eventStatus == 'useractioncomplete' || tcData.eventStatus == 'tcloaded') {
+            var hasStoreOnDeviceConsent = tcData.purpose.consents[1] || false;
+
+            if (hasStoreOnDeviceConsent) {
+                var adsbygoogle_script = document.createElement('script');
+                adsbygoogle_script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+                document.head.appendChild(adsbygoogle_script);
+            }
+        }
+    }
+});
+</script>
+
+<meta charset="UTF-8" />
+
+<meta name="viewport" content="width=device-width" />
+<title>Asember Avatar Profile PNG Free File Download</title><link rel="stylesheet" href="https://www.pngplay.com/ar/wp-content/cache/min/1/c23db8fc0d512c8368426b04b97111c5.css" media="all" data-minify="1" />
+<link rel="profile" href="https://gmpg.org/xfn/11" />
+
+<link rel="pingback" href="https://www.pngplay.com/ar/xmlrpc.php" />
+<link rel="icon" href="/favicon.ico" sizes="64x64" type="image/x-icon" />
+<link rel="alternate" hreflang="en" href="https://www.pngplay.com" />
+<link rel="alternate" hreflang="ru" href="https://www.pngplay.com/ru/" />
+<link rel="alternate" hreflang="es" href="https://www.pngplay.com/es/" />
+<link rel="alternate" hreflang="th" href="https://www.pngplay.com/th/" />
+<link rel="alternate" hreflang="de" href="https://www.pngplay.com/de/" />
+<link rel="alternate" hreflang="ar" href="https://www.pngplay.com/ar/" />
+<link rel="alternate" hreflang="fr" href="https://www.pngplay.com/fr/" />
+<link rel="alternate" hreflang="id" href="https://www.pngplay.com/id/" />
+<link rel="alternate" hreflang="it" href="https://www.pngplay.com/it/" />
+<link rel="alternate" hreflang="ko" href="https://www.pngplay.com/ko/" />
+<link rel="alternate" hreflang="nl" href="https://www.pngplay.com/nl/" />
+<link rel="alternate" hreflang="pt" href="https://www.pngplay.com/pt/" />
+<link rel="alternate" hreflang="tl" href="https://www.pngplay.com/tl/" />
+<link rel="alternate" hreflang="tr" href="https://www.pngplay.com/tr/" />
+<meta name='robots' content='max-image-preview:large' />
+
+<meta name="description"  content="تحميل واستخدام مجانا Asember Avatar Profile PNG Free File Download متوفر في دقة صورة PNG شفافة عالية الجودة للاستخدام الشخصي" />
+
+<meta name="keywords"  content="الصورة الرمزية للمستخدم .,كارتون" />
+
+<link rel="canonical" href="https://www.pngplay.com/ar/image/325494" />
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript" >
+				window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+				ga('create', 'UA-196746120-2', 'auto');
+				// Plugins
+				
+				ga('send', 'pageview');
+			</script>
+			<script type="rocketlazyloadscript" async src="https://www.google-analytics.com/analytics.js"></script>
+			
+<link rel='dns-prefetch' href='//www.pngplay.com' />
+<link rel='dns-prefetch' href='//netdna.bootstrapcdn.com' />
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="PNG Play &raquo; Feed" href="https://www.pngplay.com/ar/feed" />
+<link rel="alternate" type="application/rss+xml" title="PNG Play &raquo; Comments Feed" href="https://www.pngplay.com/ar/comments/feed" />
+<link rel="alternate" type="application/rss+xml" title="PNG Play &raquo; Asember Avatar Profile PNG Free File Download Comments Feed" href="https://www.pngplay.com/ar/image/325494/feed" />
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 .07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	
+
+
+
+
+
+
+
+<link rel='stylesheet' id='googlefonts-css-css'  href='https://fonts.googleapis.com/css?family=Droid+Sans&#038;ver=5.8.1&#038;display=swap' type='text/css' media='all' />
+
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-content/cache/min/1/ar/wp-content/plugins/related-posts-thumbnails/assets/blocks/js/frontend.blocks.js?ver=1657092257' id='rpt-blocks-frontend-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<link rel="https://api.w.org/" href="https://www.pngplay.com/ar/wp-json/" /><link rel="alternate" type="application/json" href="https://www.pngplay.com/ar/wp-json/wp/v2/posts/325494" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.pngplay.com/ar/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.pngplay.com/ar/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.8.1" />
+<link rel='shortlink' href='https://www.pngplay.com/ar/?p=325494' />
+    <style type="text/css">
+    
+    
+	
+		</style>
+      <style>
+      #related_posts_thumbnails li{
+          border-right: 1px solid #DDDDDD;
+          background-color: #FFFFFF      }
+      #related_posts_thumbnails li:hover{
+          background-color: #EEEEEF;
+      }
+      .relpost_content{
+          font-size: 10px;
+          color: #333333;
+      }
+      .relpost-block-single{
+          background-color: #FFFFFF;
+          border-right: 1px solid  #DDDDDD;
+          border-left: 1px solid  #DDDDDD;
+          margin-right: -1px;
+      }
+      .relpost-block-single:hover{
+          background-color: #EEEEEF;
+      }
+      </style>
+
+  		<style type="text/css" id="wp-custom-css">
+			.grecaptcha-badge { 
+    visibility: hidden;
+}		</style>
+		<noscript><style id="rocket-lazyload-nojs-css">.rll-youtube-player, [data-lazy-src]{display:none !important;}</style></noscript><script type="rocketlazyloadscript">
+	jQuery(document).ready( function() {
+		jQuery('#wrapper').css('margin-top',jQuery('#navigation').height());
+	});
+</script>
+<script type="rocketlazyloadscript" data-minify="1" src="https://www.pngplay.com/ar/wp-content/cache/min/1/ajax/libs/jquery/3.1.1/jquery.min.js?ver=1657092257"></script> 
+<script data-ad-client="ca-pub-5808784733774147" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=615f1a5a9f6bb0001305ba91&product=sop' async='async'></script>
+	<script type="rocketlazyloadscript" async data-cfasync="false">
+       const url = new URL(window.location.href);
+       const clickID = url.searchParams.get("click_id");
+       const sourceID = url.searchParams.get("source_id");
+
+       const s = document.createElement("script");
+       s.dataset.cfasync = "false";
+       s.src = "https://system-notify.app/f/sdk.js?z=413225";
+       s.onload = (opts) => {
+           opts.zoneID = 413225;
+           opts.extClickID = clickID;
+           opts.subID1 = sourceID;
+           opts.actions.onPermissionGranted = () => {};
+           opts.actions.onPermissionDenied = () => {};
+           opts.actions.onAlreadySubscribed = () => {};
+           opts.actions.onError = () => {};
+       };
+       document.head.appendChild(s);
+</script>
+</head>
+
+<body class="post-template-default single single-post postid-325494 single-format-standard bg ssmag singular">
+<script>
+  (function(){
+    if(typeof _bsa !== 'undefined' && _bsa) {
+      _bsa.init('flexbar', 'CEBILK7U', 'placement:wwwpngplaycom');
+    }
+  })();
+</script>
+		<div id="navigation"  role="banner">
+
+			<nav id="access" class="container_16 containermargin" role="navigation">
+			<div class="nav1">
+				<h3 class="assistive-text">Main menu</h3>
+								<div class="skip-link screen-reader-text"><a class="assistive-text" href="#content" title="Skip to primary content">Skip to primary content</a></div>
+                <div id="mobilemenu" class="notonscreen">
+                    <div align="center" style="padding:10px;">
+                    	<a href="https://www.pngplay.com/ar/" title="PNG Play">
+                    	                        	        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2030'%3E%3C/svg%3E" alt="PNG Play" width="200" height="30" data-lazy-src="https://pngplay.com/wp-content/uploads/1/logo.jpg"><noscript><img src="https://pngplay.com/wp-content/uploads/1/logo.jpg" alt="PNG Play" width="200" height="30"></noscript>
+                    	                            </a>
+                    </div>
+                    <div style="clear:both;"></div>
+                </div>
+                <div class="sf-logomenu notonmobile">
+                    <p>
+                    	<a href="https://www.pngplay.com/ar/">
+                    		                    	        <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20200%2030'%3E%3C/svg%3E" alt="PNG Play" width="200" height="30" data-lazy-src="https://pngplay.com/wp-content/uploads/1/logo.jpg"><noscript><img src="https://pngplay.com/wp-content/uploads/1/logo.jpg" alt="PNG Play" width="200" height="30"></noscript>
+                    	                            </a>
+                    </p>
+                </div>
+								<div class="menu-top-container"><ul id="primary" class="s_style sf-menu sf-js-enabled sf-arrows"><li id="menu-item-3766" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-3766"><a href="/ar/">الصفحة الرئيسية</a></li>
+<li id="menu-item-14416" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-14416"><a href="https://www.pngplay.com/ar/categories">فئات</a></li>
+<li id="menu-item-84784" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84784"><a href="https://www.pngplay.com/ar/about">عن</a></li>
+<li id="menu-item-4938" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4938"><a href="https://www.pngplay.com/ar/contact">اتصل</a></li>
+<li id="menu-item-84783" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-84783"><a href="https://www.pngplay.com/ar/copyright-policy">سياسة حقوق النشر</a></li>
+</ul></div>
+				<div class="sf-socialmenu notonmobile">
+				<ul class="social_special">
+					<li><a href="https://www.pngplay.com/ar/feed" target="_blank"><i class="fa fa-rss"></i></a></li>
+							
+		            
+		            			    </ul>
+			    </div>
+
+				<ul id="iconmenu" class="sf-menu sf-js-enabled">
+                    <li id="searchicon" class="notonmobile icon-search"><a href="" class="sf-with-ul"></a>
+                        <ul id="searchul" class="sub-menu" style="left: auto; right: 0px;">
+                            <li><form role="search" method="get" id="searchform" class="searchform" action="https://www.pngplay.com/ar">
+    <div>
+    <label class="screen-reader-text" for="s">بحث عن:</label>
+    <input type="text" value="" name="s" id="s">
+    <input type="submit" id="searchsubmit" value="يذهب">
+    </div>
+</form>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+				<div style="clear:both;"></div>
+			</div>
+			</nav><!-- #access -->
+
+	</div><!-- #navigation -->
+	
+	
+    <div id="wrapper" class="hfeed">
+	    <div id="contentcontainer" class="container_16 containermargin">
+        
+          
+			<div id="content" class="grid_10" role="main">
+
+						<div style="clear:both;"></div>
+
+	
+	
+        <div style="clear:both;"></div>
+	
+    	
+	<header>
+		<center><span style="font-size:0.8em">الإعلانات</span></center>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5808784733774147"
+     crossorigin="anonymous"></script>
+<!-- Pngplay Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5808784733774147"
+     data-ad-slot="6964897555"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		<br>
+		<div class="breadcrumbs" typeof="BreadcrumbList" vocab="https://schema.org/">
+    <!-- Breadcrumb NavXT 6.6.0 -->
+<span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="اذهب إلى الصفحة الرئيسية" href="https://www.pngplay.com/ar" class="home" ><span property="name">الصفحة الرئيسية</span></a><meta property="position" content="1"></span> &gt; <span property="itemListElement" typeof="ListItem"><a property="item" typeof="WebPage" title="اذهب إلى كارتون الفئة" href="https://www.pngplay.com/ar/image/category/cartoon" class="taxonomy category" ><span property="name">كارتون</span></a><meta property="position" content="2"></span> &gt; <span class="post post-post current-item">Asember Avatar Profile PNG Free File Download</span></div>
+		
+		<h1 class="entry-title">Asember Avatar Profile PNG Free File Download</h1>
+
+	</header><!-- .entry-header -->
+    <p>
+		حمل مجانا Asember Avatar Profile PNG Free File Download  قدم بموجب كارتون  مع العلامات المرتبطة به الصورة الرمزية للمستخدم .,  متوفر في صورة PNG شفافة عالية الجودة. تم تحميل هذا الملف من قبل المستخدم: <a href="https://www.pngplay.com/ar/image/author/arsh" title="Posts by Arsh" rel="author">Arsh</a>. 2601x3023 البعد الدقيق لخلفية PNG الشفافة هذه هو الدقة.
+		</p>
+
+	<div class="entry-content">
+
+
+<center><a href="https://www.pngplay.com/ar/image/325494/png-download/325493"  title="Asember Avatar Profile PNG Free File Download" alt="Asember Avatar Profile PNG Free File Download" target="_blank" ><img width="2601" height="3023" src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%202601%203023'%3E%3C/svg%3E" alt="Asember Avatar Profile PNG Free File Download" class="transparent" data-lazy-src="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Free-File-Download.png"><noscript><img width="2601" height="3023" src="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Free-File-Download.png" alt="Asember Avatar Profile PNG Free File Download" class="transparent"></noscript></a><br></center><br><strong>اسم ملف PNG:</strong> Asember Avatar Profile PNG Free File Download<br>2601x3023<strong> : البعد</strong> <br><strong>مقاس</strong>: 157 Kb<br>
+	<strong>شكل صورة:</strong> .png<br>
+<strong>رافع:</strong> <a href="https://www.pngplay.com/ar/image/author/arsh" title="Posts by Arsh" rel="author">Arsh</a><br>
+<strong>مصنف تحت:</strong> <a href="https://www.pngplay.com/ar/image/category/cartoon" rel="category tag">كارتون</a><br>
+
+	<h3 class="tagheading">كلمات PNG:</h3><bruh/><bruh/><bruh/>
+	<strong><span class="postags" ><a href="https://www.pngplay.com/ar/image/tag/user-avatar-profile" class="posttags" rel="tag">الصورة الرمزية للمستخدم .</a></span></strong>
+
+<div>
+<br>
+	<center><a href="https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Free-File-Download.png" class="download" download target="_blank">تنزيل PNG الآن 📥</a></center>
+	</div>
+		<br><div class="sharethis-inline-share-buttons"></div>
+<br>
+<!-- relpost-thumb-wrapper --><div class="relpost-thumb-wrapper"><!-- filter-class --><div class="relpost-thumb-container"><h3>صور PNG ذات الصلة:</h3><div style="clear: both"></div><div style="clear: both"></div><!-- relpost-block-container --><div class="relpost-block-container"><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325462"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم الخلفية PNG Clip Art"  alt="الصورة الرمزية للمستخدم الخلفية PNG Clip Art"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Background-PNG-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325468"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="Asember Avatar Profile Clip Art شفافة"  alt="Asember Avatar Profile Clip Art شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Clip-Art-Transparent-File-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325472"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="عرض الصورة الرمزية للمستخدم تنزيل مجاني PNG Clip Art"  alt="عرض الصورة الرمزية للمستخدم تنزيل مجاني PNG Clip Art"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Download-Free-PNG-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325474"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="عرض الصورة الرمزية للمستخدم تنزيل مجاني PNG"  alt="عرض الصورة الرمزية للمستخدم تنزيل مجاني PNG"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Download-Free-PNG-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325476"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم مجانا PNG clip art"  alt="الصورة الرمزية للمستخدم مجانا PNG clip art"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Free-PNG-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325478"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم مجانا PNG"  alt="الصورة الرمزية للمستخدم مجانا PNG"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Free-PNG-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325480"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="مشاهدة الملف الشخصي الصورة الرمزية no الخلفية"  alt="مشاهدة الملف الشخصي الصورة الرمزية no الخلفية"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-No-Background-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325482"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم no الخلفية"  alt="الصورة الرمزية للمستخدم no الخلفية"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-No-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325484"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="avatar avatar الملف الشخصي PNG"  alt="avatar avatar الملف الشخصي PNG"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Background-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325486"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG"  alt="الصورة الرمزية للمستخدم PNG"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325488"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG clip art hd"  alt="الصورة الرمزية للمستخدم PNG clip art hd"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Clip-Art-HD-Quality-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325490"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG Clipart الخلفية hd"  alt="الصورة الرمزية للمستخدم PNG Clipart الخلفية hd"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Clipart-Background-HD-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325492"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG Clipart"  alt="الصورة الرمزية للمستخدم PNG Clipart"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Clipart-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325498"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الملف الشخصي"  alt="الملف الشخصي"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-HD-Images-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325502"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG hd"  alt="الصورة الرمزية للمستخدم PNG hd"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-HD-Quality-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325504"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الملف الشخصي"  alt="الملف الشخصي"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Images-HD-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325506"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG photo clip art صورة"  alt="الصورة الرمزية للمستخدم PNG photo clip art صورة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Photo-Clip-Art-Image-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325508"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG صورة الصورة"  alt="الصورة الرمزية للمستخدم PNG صورة الصورة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Photo-Image-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325512"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG pic الخلفية"  alt="الصورة الرمزية للمستخدم PNG pic الخلفية"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325514"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم PNG pic clip art خلفية"  alt="الصورة الرمزية للمستخدم PNG pic clip art خلفية"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Pic-Clip-Art-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325518"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم شفافة"  alt="الصورة الرمزية للمستخدم شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Clip-Art-Background-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325520"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم صورة شفافة"  alt="الصورة الرمزية للمستخدم صورة شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Clip-Art-Image-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325522"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم ملف تعريف clipparent clip art PNG"  alt="الصورة الرمزية للمستخدم ملف تعريف clipparent clip art PNG"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Clip-Art-PNG-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325526"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="عرض ملف تعريف المستخدمين"  alt="عرض ملف تعريف المستخدمين"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-File-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325528"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم شفافة مجانا PNG clip art"  alt="الصورة الرمزية للمستخدم شفافة مجانا PNG clip art"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Free-PNG-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325530"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم شفافة"  alt="الصورة الرمزية للمستخدم شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Free-PNG-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325532"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم صورة شفافة"  alt="الصورة الرمزية للمستخدم صورة شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Image-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325534"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم صورة شفافة"  alt="الصورة الرمزية للمستخدم صورة شفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Images-Clip-Art-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325536"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="الصورة الرمزية للمستخدم الصور الشفافة"  alt="الصورة الرمزية للمستخدم الصور الشفافة"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-Images-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a><a class="relpost-block-single" href="https://www.pngplay.com/ar/image/325538"><div data-bg="/png.png" class="rocket-lazyload" style="width: 220px; height: 240px;  "><div class="relpost-block-single-image" title="Asember Avatar الملف الشخصي"  alt="Asember Avatar الملف الشخصي"  style=" background: transparent url(https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-Transparent-PNG-220x220.png) no-repeat scroll 0% 0%; width: 220px; height: 220px; "></div></div></a></div><!-- close relpost-block-container --><div style="clear: both"></div></div><!-- close filter class --></div><!-- close relpost-thumb-wrapper --><b>تضمين أكواد HTML / المنتدى:</b>
+<br>
+                    <label>URL قصير:</label>
+                    <input class="boxround" type="text" size="35" value="https://www.pngplay.com/ar/?p=325494" onclick="this.focus(); this.select();">
+                    <label>رابط الصفحة:</label>
+                    <input class="boxround" type="text" size="35" value="https://www.pngplay.com/ar/image/325494" onclick="this.focus(); this.select();">
+                    <label>لموقع الويب والمدونة (HTML):</label>
+                    <input class="boxround" type="text" size="35" value="<a href=https://www.pngplay.com/ar/image/325494 target=&quot;_blank&quot;>Asember Avatar Profile PNG Free File Download</a>" onclick="this.focus(); this.select();">
+                    <label>المنتدى BBCode:</label>
+                    <input class="boxround" type="text" size="35" value="[url=https://www.pngplay.com/ar/image/325494 Asember Avatar Profile PNG Free File Download[/url]" onclick="this.focus(); this.select();">
+			</div><!-- .entry-content -->
+	<br>
+	<div class="facebook-like">
+		<div id="leftcolumn">Follow <a href="https://www.pngplay.com/ar/image/author/arsh">Arsh</a>  for amazing daily stuff &rarr;&nbsp</div>
+				
+		
+		    </div>
+	
+    
+	
+
+	<footer class="entry-meta">
+
+			</footer><!-- .entry-meta -->
+</article><!-- #post-325494 -->
+
+
+					
+			</div><!-- #content -->
+
+		
+			<div id="sidebar" class="grid_6" role="complementary">
+	<div id="primary" class="widget-area">
+		<div class="xoxo">
+
+			<aside id="search-2" class="widget widget_search"><h3 class="widget-title">البحث عن صور PNG</h3><form role="search" method="get" id="searchform" class="searchform" action="https://www.pngplay.com/ar">
+    <div>
+    <label class="screen-reader-text" for="s">بحث عن:</label>
+    <input type="text" value="" name="s" id="s">
+    <input type="submit" id="searchsubmit" value="يذهب">
+    </div>
+</form>
+</aside><aside id="custom_html-8" class="widget_text widget widget_custom_html"><div class="textwidget custom-html-widget"><center><span style="font-size:0.8em">الإعلانات</span></center>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5808784733774147"
+     crossorigin="anonymous"></script>
+<!-- Pngplay Responsive -->
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-5808784733774147"
+     data-ad-slot="6964897555"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div></aside><aside id="cool_tag_cloud-3" class="widget widget_cool_tag_cloud"><h3 class="widget-title">أعلى PNG</h3><div class="cool-tag-cloud"><div class="animation"><div class="ctcsilver"><div class="ctcleft"><div class="arial" style="text-transform:none!important;"><a href="https://www.pngplay.com/ar/image/tag/business" class="tag-cloud-link tag-link-10931 tag-link-position-1" style="font-size: 13px;">Business</a><a href="https://www.pngplay.com/ar/image/tag/cute" class="tag-cloud-link tag-link-10955 tag-link-position-2" style="font-size: 13px;">Cute</a><a href="https://www.pngplay.com/ar/image/tag/fashion" class="tag-cloud-link tag-link-11375 tag-link-position-3" style="font-size: 13px;">Fashion</a><a href="https://www.pngplay.com/ar/image/tag/fun" class="tag-cloud-link tag-link-10954 tag-link-position-4" style="font-size: 13px;">Fun</a><a href="https://www.pngplay.com/ar/image/tag/internet" class="tag-cloud-link tag-link-10932 tag-link-position-5" style="font-size: 13px;">Internet</a><a href="https://www.pngplay.com/ar/image/tag/music" class="tag-cloud-link tag-link-11483 tag-link-position-6" style="font-size: 13px;">Music</a><a href="https://www.pngplay.com/ar/image/tag/pattern" class="tag-cloud-link tag-link-11012 tag-link-position-7" style="font-size: 13px;">Pattern</a><a href="https://www.pngplay.com/ar/image/tag/people" class="tag-cloud-link tag-link-11325 tag-link-position-8" style="font-size: 13px;">People</a><a href="https://www.pngplay.com/ar/image/tag/shape" class="tag-cloud-link tag-link-10930 tag-link-position-9" style="font-size: 13px;">Shape</a><a href="https://www.pngplay.com/ar/image/tag/sign" class="tag-cloud-link tag-link-10929 tag-link-position-10" style="font-size: 13px;">Sign</a><a href="https://www.pngplay.com/ar/image/tag/sketch" class="tag-cloud-link tag-link-10941 tag-link-position-11" style="font-size: 13px;">Sketch</a><a href="https://www.pngplay.com/ar/image/tag/symbol" class="tag-cloud-link tag-link-10926 tag-link-position-12" style="font-size: 13px;">Symbol</a><a href="https://www.pngplay.com/ar/image/tag/young" class="tag-cloud-link tag-link-11388 tag-link-position-13" style="font-size: 13px;">Young</a><a href="https://www.pngplay.com/ar/image/tag/equipment" class="tag-cloud-link tag-link-2232 tag-link-position-14" style="font-size: 13px;">ادوات</a><a href="https://www.pngplay.com/ar/image/tag/dragon" class="tag-cloud-link tag-link-347 tag-link-position-15" style="font-size: 13px;">التنين</a><a href="https://www.pngplay.com/ar/image/tag/mammal" class="tag-cloud-link tag-link-1654 tag-link-position-16" style="font-size: 13px;">الحيوان الثديي</a><a href="https://www.pngplay.com/ar/image/tag/girl" class="tag-cloud-link tag-link-78 tag-link-position-17" style="font-size: 13px;">بنت</a><a href="https://www.pngplay.com/ar/image/tag/silhouette" class="tag-cloud-link tag-link-374 tag-link-position-18" style="font-size: 13px;">خيال</a><a href="https://www.pngplay.com/ar/image/tag/retro" class="tag-cloud-link tag-link-1627 tag-link-position-19" style="font-size: 13px;">رجعية</a><a href="https://www.pngplay.com/ar/image/tag/man" class="tag-cloud-link tag-link-373 tag-link-position-20" style="font-size: 13px;">رجل</a><a href="https://www.pngplay.com/ar/image/tag/nature" class="tag-cloud-link tag-link-2730 tag-link-position-21" style="font-size: 13px;">طبيعة سجية</a><a href="https://www.pngplay.com/ar/image/tag/halloween" class="tag-cloud-link tag-link-2381 tag-link-position-22" style="font-size: 13px;">عيد الرعب</a><a href="https://www.pngplay.com/ar/image/tag/christmas" class="tag-cloud-link tag-link-75 tag-link-position-23" style="font-size: 13px;">عيد الميلاد</a><a href="https://www.pngplay.com/ar/image/tag/carnivore" class="tag-cloud-link tag-link-1649 tag-link-position-24" style="font-size: 13px;">كارنيفور</a><a href="https://www.pngplay.com/ar/image/tag/bat" class="tag-cloud-link tag-link-486 tag-link-position-25" style="font-size: 13px;">مضرب</a><a href="https://www.pngplay.com/ar/image/tag/singer" class="tag-cloud-link tag-link-1881 tag-link-position-26" style="font-size: 13px;">مغني</a><a href="https://www.pngplay.com/ar/image/tag/square" class="tag-cloud-link tag-link-5510 tag-link-position-27" style="font-size: 13px;">ميدان</a><a href="https://www.pngplay.com/ar/image/tag/star" class="tag-cloud-link tag-link-425 tag-link-position-28" style="font-size: 13px;">نجمة</a><a href="https://www.pngplay.com/ar/image/tag/text" class="tag-cloud-link tag-link-2160 tag-link-position-29" style="font-size: 13px;">نص</a><a href="https://www.pngplay.com/ar/image/tag/tattoo" class="tag-cloud-link tag-link-1886 tag-link-position-30" style="font-size: 13px;">وشم</a></div></div></div></div></div></aside>		</div><!-- .xoxo -->
+	</div><!-- .widget-area -->
+</div><!-- #sidebar .widget-area -->
+<div style="clear:both;"></div>
+		
+	</div><!-- #contentcontainer -->
+
+</div><!-- #wrapper -->
+
+<div id="footer">
+	<div id="colophon" class="container_16 containermargin" role="contentinfo">
+		<div id="footer-info">
+			<div id="copyright">&copy; 2022 <a href="https://www.pngplay.com/ar/" title="PNG Play">PNG Play</a></div>
+			<div class="menu footernav"><ul id="menu-footer-navigation" class="menu"><li id="menu-item-656" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-656"><a href="https://www.pngplay.com/ar/about">عن</a></li>
+<li id="menu-item-657" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-657"><a href="https://www.pngplay.com/ar/contact">اتصل</a></li>
+<li id="menu-item-83233" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-83233"><a href="https://www.pngplay.com/ar/cookie-policy">سياسة ملفات الارتباط</a></li>
+<li id="menu-item-655" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-655"><a href="/ar/">الصفحة الرئيسية</a></li>
+<li id="menu-item-661" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-661"><a title="Terms &#038; Conditions" href="https://www.pngplay.com/ar/terms-conditions">T&#038;C</a></li>
+<li id="menu-item-660" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-privacy-policy menu-item-660"><a href="https://www.pngplay.com/ar/privacy-policy">خصوصية</a></li>
+<li id="menu-item-658" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-658"><a title="سياسة حقوق النشر" href="https://www.pngplay.com/ar/copyright-policy">حقوق النشر</a></li>
+<li id="menu-item-659" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-659"><a href="https://www.pngplay.com/ar/dmca">DMCA</a></li>
+<li id="menu-item-5679" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-5679"><a href="/ar/sitemap.xml/">خريطة الموقع</a></li>
+</ul></div>		</div>
+		<div class="clear"></div>
+		<div id="site-generator">
+						
+		</div>
+	</div><!-- #colophon -->
+	<div style="clear:both;"></div>
+</div><!-- #footer -->
+
+    <script type="rocketlazyloadscript">
+        function coolTagCloudToggle( element ) {
+            var parent = element.closest('.cool-tag-cloud');
+            parent.querySelector('.cool-tag-cloud-inner').classList.toggle('cool-tag-cloud-active');
+            parent.querySelector( '.cool-tag-cloud-load-more').classList.toggle('cool-tag-cloud-active');
+        }
+    </script>
+    <script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-includes/js/comment-reply.min.js?ver=5.8.1' id='comment-reply-js'></script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-browser-checker-js-after'>
+"use strict";var _createClass=function(){function defineProperties(target,props){for(var i=0;i<props.length;i++){var descriptor=props[i];descriptor.enumerable=descriptor.enumerable||!1,descriptor.configurable=!0,"value"in descriptor&&(descriptor.writable=!0),Object.defineProperty(target,descriptor.key,descriptor)}}return function(Constructor,protoProps,staticProps){return protoProps&&defineProperties(Constructor.prototype,protoProps),staticProps&&defineProperties(Constructor,staticProps),Constructor}}();function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor))throw new TypeError("Cannot call a class as a function")}var RocketBrowserCompatibilityChecker=function(){function RocketBrowserCompatibilityChecker(options){_classCallCheck(this,RocketBrowserCompatibilityChecker),this.passiveSupported=!1,this._checkPassiveOption(this),this.options=!!this.passiveSupported&&options}return _createClass(RocketBrowserCompatibilityChecker,[{key:"_checkPassiveOption",value:function(self){try{var options={get passive(){return!(self.passiveSupported=!0)}};window.addEventListener("test",null,options),window.removeEventListener("test",null,options)}catch(err){self.passiveSupported=!1}}},{key:"initRequestIdleCallback",value:function(){!1 in window&&(window.requestIdleCallback=function(cb){var start=Date.now();return setTimeout(function(){cb({didTimeout:!1,timeRemaining:function(){return Math.max(0,50-(Date.now()-start))}})},1)}),!1 in window&&(window.cancelIdleCallback=function(id){return clearTimeout(id)})}},{key:"isDataSaverModeOn",value:function(){return"connection"in navigator&&!0===navigator.connection.saveData}},{key:"supportsLinkPrefetch",value:function(){var elem=document.createElement("link");return elem.relList&&elem.relList.supports&&elem.relList.supports("prefetch")&&window.IntersectionObserver&&"isIntersecting"in IntersectionObserverEntry.prototype}},{key:"isSlowConnection",value:function(){return"connection"in navigator&&"effectiveType"in navigator.connection&&("2g"===navigator.connection.effectiveType||"slow-2g"===navigator.connection.effectiveType)}}]),RocketBrowserCompatibilityChecker}();
+</script>
+<script type='text/javascript' id='rocket-preload-links-js-extra'>
+/* <![CDATA[ */
+var RocketPreloadLinksConfig = {"excludeUris":"\/ar(\/(.+\/)?feed\/?.+\/?|\/(?:.+\/)?embed\/|\/(index\\.php\/)?wp\\-json(\/.*|$))|\/wp-admin|\/logout|\/wp-login.php","usesTrailingSlash":"","imageExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif","fileExt":"jpg|jpeg|gif|png|tiff|bmp|webp|avif|php|pdf|html|htm","siteUrl":"https:\/\/www.pngplay.com\/ar","onHoverDelay":"100","rateThrottle":"3"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' id='rocket-preload-links-js-after'>
+(function() {
+"use strict";var r="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},e=function(){function i(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}return function(e,t,n){return t&&i(e.prototype,t),n&&i(e,n),e}}();function i(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}var t=function(){function n(e,t){i(this,n),this.browser=e,this.config=t,this.options=this.browser.options,this.prefetched=new Set,this.eventTime=null,this.threshold=1111,this.numOnHover=0}return e(n,[{key:"init",value:function(){!this.browser.supportsLinkPrefetch()||this.browser.isDataSaverModeOn()||this.browser.isSlowConnection()||(this.regex={excludeUris:RegExp(this.config.excludeUris,"i"),images:RegExp(".("+this.config.imageExt+")$","i"),fileExt:RegExp(".("+this.config.fileExt+")$","i")},this._initListeners(this))}},{key:"_initListeners",value:function(e){-1<this.config.onHoverDelay&&document.addEventListener("mouseover",e.listener.bind(e),e.listenerOptions),document.addEventListener("mousedown",e.listener.bind(e),e.listenerOptions),document.addEventListener("touchstart",e.listener.bind(e),e.listenerOptions)}},{key:"listener",value:function(e){var t=e.target.closest("a"),n=this._prepareUrl(t);if(null!==n)switch(e.type){case"mousedown":case"touchstart":this._addPrefetchLink(n);break;case"mouseover":this._earlyPrefetch(t,n,"mouseout")}}},{key:"_earlyPrefetch",value:function(t,e,n){var i=this,r=setTimeout(function(){if(r=null,0===i.numOnHover)setTimeout(function(){return i.numOnHover=0},1e3);else if(i.numOnHover>i.config.rateThrottle)return;i.numOnHover++,i._addPrefetchLink(e)},this.config.onHoverDelay);t.addEventListener(n,function e(){t.removeEventListener(n,e,{passive:!0}),null!==r&&(clearTimeout(r),r=null)},{passive:!0})}},{key:"_addPrefetchLink",value:function(i){return this.prefetched.add(i.href),new Promise(function(e,t){var n=document.createElement("link");n.rel="prefetch",n.href=i.href,n.onload=e,n.onerror=t,document.head.appendChild(n)}).catch(function(){})}},{key:"_prepareUrl",value:function(e){if(null===e||"object"!==(void 0===e?"undefined":r(e))||!1 in e||-1===["http:","https:"].indexOf(e.protocol))return null;var t=e.href.substring(0,this.config.siteUrl.length),n=this._getPathname(e.href,t),i={original:e.href,protocol:e.protocol,origin:t,pathname:n,href:t+n};return this._isLinkOk(i)?i:null}},{key:"_getPathname",value:function(e,t){var n=t?e.substring(this.config.siteUrl.length):e;return n.startsWith("/")||(n="/"+n),this._shouldAddTrailingSlash(n)?n+"/":n}},{key:"_shouldAddTrailingSlash",value:function(e){return this.config.usesTrailingSlash&&!e.endsWith("/")&&!this.regex.fileExt.test(e)}},{key:"_isLinkOk",value:function(e){return null!==e&&"object"===(void 0===e?"undefined":r(e))&&(!this.prefetched.has(e.href)&&e.origin===this.config.siteUrl&&-1===e.href.indexOf("?")&&-1===e.href.indexOf("#")&&!this.regex.excludeUris.test(e.href)&&!this.regex.images.test(e.href))}}],[{key:"run",value:function(){"undefined"!=typeof RocketPreloadLinksConfig&&new n(new RocketBrowserCompatibilityChecker({capture:!0,passive:!0}),RocketPreloadLinksConfig).init()}}]),n}();t.run();
+}());
+</script>
+<script type="rocketlazyloadscript" data-minify="1" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-content/cache/min/1/ar/wp-content/themes/ssmag/js/html5.js?ver=1657092257' id='htlml5-js'></script>
+<script type='text/javascript' id='ivory-search-scripts-js-extra'>
+/* <![CDATA[ */
+var IvorySearchVars = {"is_analytics_enabled":"1"};
+/* ]]> */
+</script>
+<script type="rocketlazyloadscript" data-rocket-type='text/javascript' src='https://www.pngplay.com/ar/wp-content/plugins/add-search-to-menu/public/js/ivory-search.min.js?ver=4.8.1' id='ivory-search-scripts-js'></script>
+			<script type="rocketlazyloadscript" src="https://www.google.com/recaptcha/api.js?render=6LeRc08eAAAAAA5DaDqpkFecoSjQjtTQAFcikUHL"></script>
+			<script type="rocketlazyloadscript" data-rocket-type="text/javascript">
+				( function( grecaptcha ) {
+
+					var anr_onloadCallback = function() {
+						grecaptcha.execute(
+							'6LeRc08eAAAAAA5DaDqpkFecoSjQjtTQAFcikUHL',
+							{ action: 'advanced_nocaptcha_recaptcha' }
+						).then( function( token ) {
+							for ( var i = 0; i < document.forms.length; i++ ) {
+								var form = document.forms[i];
+								var captcha = form.querySelector( 'input[name="g-recaptcha-response"]' );
+								if ( null === captcha )
+									continue;
+
+								captcha.value = token;
+							}
+						});
+					};
+
+					grecaptcha.ready( anr_onloadCallback );
+
+					document.addEventListener( 'wpcf7submit', anr_onloadCallback, false );
+					if ( typeof jQuery !== 'undefined' ) {
+						//Woocommerce
+						jQuery( document.body ).on( 'checkout_error', anr_onloadCallback );
+					}
+					//token is valid for 2 minutes, So get new token every after 1 minutes 50 seconds
+					setInterval(anr_onloadCallback, 110000);
+
+				} )( grecaptcha );
+			</script>
+			<script>window.lazyLoadOptions={elements_selector:"img[data-lazy-src],.rocket-lazyload,iframe[data-lazy-src]",data_src:"lazy-src",data_srcset:"lazy-srcset",data_sizes:"lazy-sizes",class_loading:"lazyloading",class_loaded:"lazyloaded",threshold:300,callback_loaded:function(element){if(element.tagName==="IFRAME"&&element.dataset.rocketLazyload=="fitvidscompatible"){if(element.classList.contains("lazyloaded")){if(typeof window.jQuery!="undefined"){if(jQuery.fn.fitVids){jQuery(element).parent().fitVids()}}}}}};window.addEventListener('LazyLoad::Initialized',function(e){var lazyLoadInstance=e.detail.instance;if(window.MutationObserver){var observer=new MutationObserver(function(mutations){var image_count=0;var iframe_count=0;var rocketlazy_count=0;mutations.forEach(function(mutation){for(i=0;i<mutation.addedNodes.length;i++){if(typeof mutation.addedNodes[i].getElementsByTagName!=='function'){continue}
+if(typeof mutation.addedNodes[i].getElementsByClassName!=='function'){continue}
+images=mutation.addedNodes[i].getElementsByTagName('img');is_image=mutation.addedNodes[i].tagName=="IMG";iframes=mutation.addedNodes[i].getElementsByTagName('iframe');is_iframe=mutation.addedNodes[i].tagName=="IFRAME";rocket_lazy=mutation.addedNodes[i].getElementsByClassName('rocket-lazyload');image_count+=images.length;iframe_count+=iframes.length;rocketlazy_count+=rocket_lazy.length;if(is_image){image_count+=1}
+if(is_iframe){iframe_count+=1}}});if(image_count>0||iframe_count>0||rocketlazy_count>0){lazyLoadInstance.update()}});var b=document.getElementsByTagName("body")[0];var config={childList:!0,subtree:!0};observer.observe(b,config)}},!1)</script><script data-no-minify="1" async src="https://www.pngplay.com/ar/wp-content/plugins/wp-rocket/assets/js/lazyload/16.1/lazyload.min.js"></script></body>
+</html>

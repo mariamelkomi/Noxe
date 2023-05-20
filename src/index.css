@@ -1,0 +1,34 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya&family=Poppins:wght@300&family=Ramaraja&family=Source+Sans+Pro:wght@600&display=swap');
+ body
+ {
+  background-color: #131722;
+  font-family: 'Poppins', sans-serif !important;
+  color: white; 
+}
+.brdr
+{
+  height: 1px;
+  background-color: rgb(66, 65, 65);
+}
+.link , .link:hover
+{
+  text-decoration: none;
+  color: white;
+}
+ input
+ {
+  color: white !important;
+ }
+ .line
+ {
+  width: 75%;
+  height: 1px;
+  background-color: rgb(66, 65, 65);
+  margin: auto;
+  
+ }
+ .mouse
+ {
+  cursor: pointer;
+ }
